@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find bilibot_bringup)/minimal.launch" />
+  <node pkg="bilibot_button_test" type="button_test.py" name="button_test" output="screen"/>
+</launch>

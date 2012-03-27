@@ -1,0 +1,17 @@
+<package>
+  <description brief="Bilibot Button Test">
+
+     Simple example on how to use Bilibot's E-Stop and Demo buttons
+
+  </description>
+  <author>mmedvede</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>https://github.com/mmedvede/bilibot_button_test/</url>
+  <depend package="rospy"/>
+  <depend package="std_msgs"/>
+  <depend package="bilibot_node"/>
+
+</package>
+
+
