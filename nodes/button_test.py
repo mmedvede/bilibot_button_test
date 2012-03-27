@@ -24,8 +24,10 @@ def got_scan(msg):
     cmd = Twist()
     cmd.linear.x = 0.1
     cmd.angular.z = 0
-    pub.publish(cmd)
+    print "Doing something."
+    #pub.publish(cmd)
   else:
+    print "Not doing anything."
     # Send zero velocity command
     pub.publish(Twist())
 
