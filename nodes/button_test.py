@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 import roslib; roslib.load_manifest('bilibot_button_test')
 import rospy
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import LaserScan
 from bilibot_node.msg import PowerboardSensorState
 """
   Example on how to use some of the bilibot's buttons.
@@ -10,26 +8,20 @@ from bilibot_node.msg import PowerboardSensorState
 """
 rospy.init_node('button_test')
 
-pub = rospy.Publisher('cmd_vel', Twist)
-
 running = False
 
-def got_scan(msg): 
+def loop(): 
   """
     Only move when running is True. 
     Value of running is derived from E-Stop and Demo button presses
   """
   if running:
     # Do some work here
-    cmd = Twist()
-    cmd.linear.x = 0.1
-    cmd.angular.z = 0
-    print "Doing something."
-    #pub.publish(cmd)
+    print "Doing something. Press E-Stop to stop."
   else:
-    print "Not doing anything."
-    # Send zero velocity command
-    pub.publish(Twist())
+    print "Not doing anything. Press demo to start."
+    rospy.sleep(1)
+
 
 def got_sensorstate(msg):
   # Press "Demo" button to start and "E-Stop" to stop
@@ -39,7 +31,9 @@ def got_sensorstate(msg):
   if msg.estop_button:
     running = False
 
-rospy.Subscriber('scan', LaserScan, got_scan)
 rospy.Subscriber('sensor_state', PowerboardSensorState, got_sensorstate) 
 
-rospy.spin()
+while not rospy.is_shutdown():
+  loop()
+
+#rospy.spin()
